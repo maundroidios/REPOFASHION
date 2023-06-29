@@ -35,12 +35,88 @@ http://localhost:8080/api/promotion/custombasic/35455/2020-06-14
 Partial Search By BrandId, Product Id and  Date sinse 
 http://localhost:8080/api/promotion/customadvance/1/35455/2020-06-14
 
-FINXING some error with Time and Dates..
-Pending SOlving
+- Test 1: petición a las 10:00 del día 14 del producto 35455 para la brand 1 (ZARA)
+- Test 2: petición a las 16:00 del día 14 del producto 35455 para la brand 1 (ZARA)
+- Test 3: petición a las 21:00 del día 14 del producto 35455 para la brand 1 (ZARA)
+- Test 4: petición a las 10:00 del día 15 del producto 35455 para la brand 1 (ZARA)
+- Test 5: petición a las 21:00 del día 16 del producto 35455 para la brand 1 (ZARA)
 
-http://localhost:8080/api/promotion/customadvance/1/35455/2020-06-14@16:30:00
-Pending compare between hours of startDate and EndDate to get the rigth value.
-Maybe for wednesday I can fix it.
+
+
+PRUEBAS CON POSTMAN
+
+http://localhost:8080/api/promotion/customadvance/1/35455/2020-06-14@10:00:00
+
+RETORNA
+
+{
+"productId": 35455,
+"brandId": 1,
+"fee": 1,
+"startDateTime": "2020-06-13T22:00:00.000+00:00",
+"priority": 0,
+"endDateTime": "2020-12-31T22:59:59.000+00:00",
+"finalPrice": 35.5
+}
+
+
+
+http://localhost:8080/api/promotion/customadvance/1/35455/2020-06-14@16:00:00
+
+RETORNA
+
+{
+"productId": 35455,
+"brandId": 1,
+"fee": 2,
+"startDateTime": "2020-06-14T13:00:00.000+00:00",
+"priority": 1,
+"endDateTime": "2020-06-14T18:30:00.000+00:00",
+"finalPrice": 25.45
+}
+
+http://localhost:8080/api/promotion/customadvance/1/35455/2020-06-14@21:00:00
+
+RETORNA
+
+{
+"productId": 35455,
+"brandId": 1,
+"fee": 1,
+"startDateTime": "2020-06-13T22:00:00.000+00:00",
+"priority": 0,
+"endDateTime": "2020-12-31T22:59:59.000+00:00",
+"finalPrice": 35.5
+}
+
+http://localhost:8080/api/promotion/customadvance/1/35455/2020-06-15@10:00:00
+
+RETORNA
+
+{
+"productId": 35455,
+"brandId": 1,
+"fee": 3,
+"startDateTime": "2020-06-14T22:00:00.000+00:00",
+"priority": 1,
+"endDateTime": "2020-06-15T09:00:00.000+00:00",
+"finalPrice": 30.5
+}
+
+http://localhost:8080/api/promotion/customadvance/1/35455/2020-06-16@21:00:00
+
+RETORNA
+
+{
+"productId": 35455,
+"brandId": 1,
+"fee": 4,
+"startDateTime": "2020-06-15T14:00:00.000+00:00",
+"priority": 1,
+"endDateTime": "2020-12-31T22:59:59.000+00:00",
+"finalPrice": 38.95
+}
+
 
 Please let me know for any suggestion calling Support at
 +34 674312339
