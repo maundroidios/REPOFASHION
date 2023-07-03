@@ -15,7 +15,7 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HttpRequestTest {
+ class HttpRequestTest {
     @Value(value="${local.server.port}")
     private int port;
 
@@ -23,7 +23,7 @@ public class HttpRequestTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void promotionTest() throws Exception {
+     void promotionTest() throws Exception {
         Promotion promoTest = new Promotion();
         promoTest.getStartDate();
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/api/promotions",

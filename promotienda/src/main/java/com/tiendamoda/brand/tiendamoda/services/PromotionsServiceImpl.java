@@ -82,20 +82,18 @@ public class PromotionsServiceImpl implements PromotionsService {
             return dto;
         }).toList();
 
-        Optional<PromotionDTO> promotionDTO = promotionDTOlist.stream()
-                .max(Comparator
-                        .comparingInt(PromotionDTO::getPriority));
-        if (!promotionDTO.isEmpty())
+        Optional<PromotionDTO> promotionDTO = null;
+        if(!promotionDTOlist.isEmpty()) {
+            promotionDTO = promotionDTOlist.stream()
+                    .max(Comparator
+                            .comparingInt(PromotionDTO::getPriority));
+        }
+
+        if (promotionDTO.isPresent())
             return promotionDTO.get();
         else
             return null;
 
-    }
-
-    private static String getDateWithoutTime(Date date) {
-        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString = dt1.format(date);
-        return dateString;
     }
 
 }

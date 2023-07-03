@@ -14,7 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class Test16hoursDay14 {
+ class Test16hoursDay14 {
     @Value(value = "${local.server.port}")
     private int port;
 
@@ -22,7 +22,7 @@ public class Test16hoursDay14 {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void promotionTest16hoursDay14() throws Exception {
+     void promotionTest16hoursDay14() throws Exception {
         String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         Date dateStart = simpleDateFormat.parse("2020-06-14 15:00:00");

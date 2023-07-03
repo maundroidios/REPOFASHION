@@ -13,7 +13,7 @@ import java.util.Date;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class Test21hoursDay16 {
+ class Test21hoursDay16 {
     @Value(value = "${local.server.port}")
     private int port;
 
@@ -21,7 +21,7 @@ public class Test21hoursDay16 {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void promotionTest21hoursDay16() throws Exception {
+     void promotionTest21hoursDay16() throws Exception {
 
         String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
