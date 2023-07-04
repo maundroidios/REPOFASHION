@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="prices_tbl")
+@Table(name = "prices_tbl")
 @Data
 public class Promotion {
     @Id

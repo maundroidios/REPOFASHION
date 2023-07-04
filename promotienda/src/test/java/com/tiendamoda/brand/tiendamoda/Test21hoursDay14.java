@@ -13,15 +13,16 @@ import java.util.Date;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
- class Test21hoursDay14 {
+class Test21hoursDay14 {
     @Value(value = "${local.server.port}")
     private int port;
+
 
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Test
-     void promotionTest21hoursDay14() throws Exception {
+    void promotionTest21hoursDay14() throws Exception {
 
         String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -37,7 +38,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
         promoTest.setEndDateTime(dateEnd);
         promoTest.setFinalPrice(35.5D);
 
-        assertThat(this.restTemplate.getForObject("http://localhost:8080/api/promotion/customadvance/1/35455/2020-06-14@21:00:00",
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port
+                        + "/api/promotion/customadvance/1/35455/2020-06-14@21:00:00",
                 PromotionDTO.class)).isEqualTo(promoTest);
     }
 }

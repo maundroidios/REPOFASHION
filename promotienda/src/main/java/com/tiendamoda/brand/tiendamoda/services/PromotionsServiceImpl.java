@@ -8,18 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class PromotionsServiceImpl implements PromotionsService {
 
     @Autowired
     private PromotionRepository promotionRepository;
-
 
     @Override
     public List<Promotion> getPromotions() {
@@ -28,31 +23,15 @@ public class PromotionsServiceImpl implements PromotionsService {
 
     public Promotion getPromotionById(Long id) {
         Optional<Promotion> optionalPromotion = promotionRepository.findById(id);
-        return optionalPromotion.get();
-    }
-
-    public List<Promotion> getPromotionBySinse(Date date) {
-        Promotion promo = new Promotion();
-        promo.setStartDateTime(date);
-        return promotionRepository.findAll(Example.of(promo));
+        return optionalPromotion.orElse(null);
     }
 
     @Override
-    public List<Promotion> getPromotionByProductSinse(Long productId, Date date) {
-        Promotion promotion = new Promotion();
-        promotion.setProductId(productId);
-        promotion.setStartDateTime(date);
-        return promotionRepository.findAll(Example.of(promotion));
-    }
-
-    @Override
-    public PromotionDTO getPromotionByBrandProductSinse(Long idBrand, Long productId, Date date) {
+    public PromotionDTO getPromotionByBrandProductDate(Long idBrand, Long productId, Date date) {
         Promotion promotion = new Promotion();
         promotion.setIdBrand(idBrand);
         promotion.setProductId(productId);
-
         List<Promotion> results = promotionRepository.findAll(Example.of(promotion));
-
         return calculateFee(calculateRangeDateTime(results, date));
 
     }
@@ -70,7 +49,7 @@ public class PromotionsServiceImpl implements PromotionsService {
 
 
     private PromotionDTO calculateFee(List<Promotion> results) {
-        List<PromotionDTO> promotionDTOlist = results.stream().map(promotion -> {
+        List<PromotionDTO> promotionDTOs = results.stream().map(promotion -> {
             PromotionDTO dto = new PromotionDTO();
             dto.setProductId(promotion.getProductId());
             dto.setBrandId(promotion.getIdBrand());
@@ -82,18 +61,14 @@ public class PromotionsServiceImpl implements PromotionsService {
             return dto;
         }).toList();
 
-        Optional<PromotionDTO> promotionDTO = null;
-        if(!promotionDTOlist.isEmpty()) {
-            promotionDTO = promotionDTOlist.stream()
+        Optional<PromotionDTO> promotionDTO = Optional.empty();
+        if (!promotionDTOs.isEmpty()) {
+            promotionDTO = promotionDTOs.stream()
                     .max(Comparator
                             .comparingInt(PromotionDTO::getPriority));
         }
 
-        if (promotionDTO.isPresent())
-            return promotionDTO.get();
-        else
-            return null;
-
+        return promotionDTO.orElse(null);
     }
 
 }

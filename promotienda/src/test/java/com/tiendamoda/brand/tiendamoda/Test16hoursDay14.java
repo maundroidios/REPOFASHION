@@ -14,7 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
- class Test16hoursDay14 {
+class Test16hoursDay14 {
     @Value(value = "${local.server.port}")
     private int port;
 
@@ -22,7 +22,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
     private TestRestTemplate restTemplate;
 
     @Test
-     void promotionTest16hoursDay14() throws Exception {
+    void promotionTest16hoursDay14() throws Exception {
         String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         Date dateStart = simpleDateFormat.parse("2020-06-14 15:00:00");
@@ -37,7 +37,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
         promoTest.setEndDateTime(dateEnd);
         promoTest.setFinalPrice(25.45D);
 
-        assertThat(this.restTemplate.getForObject("http://localhost:8080/api/promotion/customadvance/1/35455/2020-06-14@16:00:00",
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port
+                        + "/api/promotion/customadvance/1/35455/2020-06-14@16:00:00",
                 PromotionDTO.class)).isEqualTo(promoTest);
 
 

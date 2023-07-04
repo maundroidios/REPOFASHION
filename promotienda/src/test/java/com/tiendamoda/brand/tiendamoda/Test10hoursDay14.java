@@ -36,7 +36,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
         promoTest.setEndDateTime(dateEnd);
         promoTest.setFinalPrice(35.50D);
 
-        assertThat(this.restTemplate.getForObject("http://localhost:8080/api/promotion/customadvance/1/35455/2020-06-14@10:00:00",
+        assertThat(this.restTemplate.getForObject("http://localhost:"+port+"/api/promotion/customadvance/1/35455/2020-06-14@10:00:00",
                 PromotionDTO.class)).isEqualTo(promoTest);
     }
 
